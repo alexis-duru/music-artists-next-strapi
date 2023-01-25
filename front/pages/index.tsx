@@ -18,19 +18,18 @@ const Home = ({ artists, error, genres }) => {
           <h2>{artist.attributes.name}</h2>
           <h3>{artist.attributes.description}</h3>
           <h4>{artist.attributes.genres.data?.attributes.name}</h4>
-          {/* <img src={'http://localhost:1337' + artist.attributes.image.data?.attributes.url} alt="toto"  width={500} height={500}/> */}
-                <Image 
-          src={'http://localhost:1337' + artist.attributes.image.data?.attributes.url}
-          alt="artist image"
-          width={500} 
-          height={500}
-      />
-      <Image 
-          src={'http://localhost:1337' + artist.attributes.artwork.data?.attributes.url}
-          alt="artwork image"
-          width={500}
-          height={500}
-      />
+            <Image 
+                src={`${process.env.baseUrl}` + artist.attributes.image.data?.attributes.url}
+                alt="artist image"
+                width={500} 
+                height={500}
+            />
+            <Image 
+                src={`${process.env.baseUrl}` + artist.attributes.artwork.data?.attributes.url}
+                alt="artwork image"
+                width={500}
+                height={500}
+            />
         </li>
       ))}
     </ul>
@@ -41,11 +40,11 @@ const Home = ({ artists, error, genres }) => {
 
 export async function getStaticProps() {
   // Fetch data from first endpoint
-  const response = await fetch('http://localhost:1337/api/artists?populate=artwork,image,genres');
+  const response = await fetch(`${process.env.baseApiUrl}/artists?populate=artwork,image,genres`);
   const artists = await response.json();
 
   // Fetch data from second endpoint
-  const res2 = await fetch('http://localhost:1337/api/genres');
+  const res2 = await fetch(`${process.env.baseApiUrl}/genres`);
   const genres = await res2.json();
 
   // Return the data as props

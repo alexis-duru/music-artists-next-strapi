@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ["localhost"],
   },
+  env: {
+    baseApiUrl: "http://localhost:1337/api",
+    baseUrl: "http://localhost:1337",
+  },
 };
 
 module.exports = nextConfig;
