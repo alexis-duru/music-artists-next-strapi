@@ -18,15 +18,19 @@ const Home = ({ artists, error, genres }) => {
           <h2>{artist.attributes.name}</h2>
           <h3>{artist.attributes.description}</h3>
           <h4>{artist.attributes.genres.data?.attributes.name}</h4>
-          <img src={'http://localhost:1337' + artist.attributes.image.data?.attributes.url} alt="toto"  width={500} height={500}/>
-          <img src={'http://localhost:1337' + artist.attributes.artwork.data?.attributes.url} alt="toto"  width={500} height={500}/>
-          {/* <h4>{artist.attributes.genre}</h4> */}
-           {/* {console.log(artist.attributes.image.data?.attributes.url)} */}
-          {/* <Image src={artist.attributes.image.data?.attributes.url}
-          alt="toto"
+          {/* <img src={'http://localhost:1337' + artist.attributes.image.data?.attributes.url} alt="toto"  width={500} height={500}/> */}
+                <Image 
+          src={'http://localhost:1337' + artist.attributes.image.data?.attributes.url}
+          alt="artist image"
+          width={500} 
+          height={500}
+      />
+      <Image 
+          src={'http://localhost:1337' + artist.attributes.artwork.data?.attributes.url}
+          alt="artwork image"
           width={500}
           height={500}
-          /> */}
+      />
         </li>
       ))}
     </ul>
@@ -51,50 +55,11 @@ export async function getStaticProps() {
       genres
     },
   }
+
+//   const [data1, data2] = await Promise.all([
+//     fetch('https://your-api.com/endpoint1').then(res => res.json()),
+//     fetch('https://your-api.com/endpoint2').then(res => res.json())
+// ])
 }
-
-// Home.getInitialProps = async ctx => {
-//   try {
-
-//     const parseJSON = resp => (resp.json ? resp.json() : resp);
-
-//     const checkStatus = resp => {
-//       if (resp.status >= 200 && resp.status < 300) {
-//         return resp;
-//       }
-
-//       return parseJSON(resp).then(resp => {
-//         throw resp;
-//       });
-//     };
-
-//     const headers = {
-//       'Content-Type': 'application/json',
-//     };
-
-//     const artists = await 
-//     fetch('http://localhost:1337/api/artists?populate=artwork,image',  {
-//       method: 'GET',
-//       headers,
-//     })
-//       .then(checkStatus)
-//       .then(parseJSON);
-
-//     const genres = await
-//     fetch('http://localhost:1337/api/genres',  {
-//       method: 'GET',
-//       headers,
-//     })
-//       .then(checkStatus)
-//       .then(parseJSON);
-
-//     return { artists };
-
-//   } catch (error) {
-//     return { error };
-//   }
-
-// };
-
 
 export default Home;
