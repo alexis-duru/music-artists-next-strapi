@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Nav from '../components/nav';
 import Link from 'next/link';
 
-const Home = ({ artists, error, genres }) => {
+const Artists = ({ artists, error, genres }) => {
   if (error) {
     return <div>An error occured: {error.message}</div>;
   }
@@ -13,10 +13,29 @@ const Home = ({ artists, error, genres }) => {
   // console.log("genre : " + JSON.stringify(genres.data[1].attributes.name))
   return (
     <>
-    <section id="homepage">
-      <h1>ELECTRONIC MUSIC ARTISTS PLAYLIST</h1>
-      <Link href="/artists">Discover our artists here</Link>
-    </section>
+    <ul>
+      {artists.data.map(artist => (
+        <li key={artist.id}>
+          <Link href={`/artist/${artist.id}`}>
+          <h2>{artist.attributes.name}</h2>
+          </Link>
+          <h3>{artist.attributes.description}</h3>
+          <h4>{artist.attributes.genres.data?.attributes.name}</h4>
+            <Image 
+                src={`${process.env.baseUrl}` + artist.attributes.image.data?.attributes.url}
+                alt="artist image"
+                width={500} 
+                height={500}
+            />
+            <Image 
+                src={`${process.env.baseUrl}` + artist.attributes.artwork.data?.attributes.url}
+                alt="artwork image"
+                width={500}
+                height={500}
+            />
+        </li>
+      ))}
+    </ul>
     </>
 
   );
@@ -45,4 +64,4 @@ export async function getStaticProps() {
 // ])
 }
 
-export default Home;
+export default Artists;
