@@ -3,13 +3,14 @@ import Nav from '../components/nav';
 import Link from 'next/link';
 
 const Home = ({ artists, error, genres }) => {
+
   if (error) {
     return <div>An error occured: {error.message}</div>;
   }
 
   // console.log(artists)
   console.log(artists)
-  console.log(genres)
+  // console.log(genres)
   // console.log("genre : " + JSON.stringify(genres.data[1].attributes.name))
   return (
     <>

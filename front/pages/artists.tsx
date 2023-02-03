@@ -7,16 +7,20 @@ const Artists = ({ artists, error, genres }) => {
     return <div>An error occured: {error.message}</div>;
   }
 
-  // console.log(artists)
+
+
   console.log(artists)
-  console.log(genres)
+
+  // console.log(artists)
+  // console.log(artists)
+  // console.log(genres)
   // console.log("genre : " + JSON.stringify(genres.data[1].attributes.name))
   return (
     <>
     <ul>
       {artists.data.map(artist => (
         <li key={artist.id}>
-          <Link href={`/artist/${artist.id}`}>
+          <Link href={`/artist/${artist.attributes.slug}`}>
           <h2>{artist.attributes.name}</h2>
           </Link>
           <h3>{artist.attributes.description}</h3>
@@ -43,7 +47,7 @@ const Artists = ({ artists, error, genres }) => {
 
 export async function getStaticProps() {
   // Fetch data from first endpoint
-  const response = await fetch(`${process.env.baseApiUrl}/artists?populate=artwork,image,genres`);
+  const response = await fetch(`${process.env.baseApiUrl}/artists?populate=*`);
   const artists = await response.json();
 
   // Fetch data from second endpoint

@@ -45,6 +45,14 @@
       "relation": "manyToOne",
       "target": "api::genre.genre",
       "inversedBy": "artists"
+    },
+    "oembed": {
+      "type": "customField",
+      "customField": "plugin::oembed.oembed"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true
     }
   }
 }
